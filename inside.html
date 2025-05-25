@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inside | Rain Inn</title>
   <style>
     body {
@@ -10,15 +11,18 @@
       background-size: cover;
       font-family: 'Georgia', serif;
       color: #f2e9e4;
+      position: relative;
+      min-height: 100vh;
     }
 
     .nav {
-      position: absolute;
+      position: fixed;
       top: 1rem;
       left: 1rem;
       background: rgba(0, 0, 0, 0.6);
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
+      z-index: 1000;
     }
 
     .nav a {
@@ -29,7 +33,7 @@
     }
 
     .welcome {
-      position: absolute;
+      position: fixed;
       bottom: 2rem;
       left: 2rem;
       background: rgba(0, 0, 0, 0.5);
@@ -39,23 +43,27 @@
       line-height: 1.6;
     }
 
-    /* 📬 You've Got Mail Button */
-    .mail-button {
-      position: absolute;
-      top: 380px;
-      left: 235px;
+    .mail-button,
+    .reading-toggle,
+    .rain-toggle {
+      position: fixed;
       background: #fff8f0;
       border: 2px solid #8b5e3c;
       border-radius: 12px;
       padding: 0.6rem 1.1rem;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: #4b2e2e;
       cursor: pointer;
       font-family: 'Georgia', serif;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
       transition: background 0.3s, transform 0.2s;
-      animation: floaty 3s ease-in-out infinite;
       z-index: 999;
+    }
+
+    .mail-button {
+      top: 380px;
+      left: 235px;
+      animation: floaty 3s ease-in-out infinite;
     }
 
     .mail-button:hover {
@@ -63,10 +71,9 @@
       transform: translateY(-3px);
     }
 
-    /* ✨ Modal Base */
     .modal {
       display: none;
-      position: absolute;
+      position: fixed;
       top: 460px;
       left: 140px;
       width: 420px;
@@ -80,7 +87,6 @@
       overflow: auto;
     }
 
-    /* 💌 Log Modal Specific */
     .log-content {
       padding: 1rem;
       font-family: 'Georgia', serif;
@@ -106,37 +112,24 @@
     }
 
     .log-content li::before {
-      content: "🪵      ";
+      content: "🪵 ";
       position: absolute;
       left: 0;
     }
 
-    .modal iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* 📚 Reading Nook Styles */
     .reading-toggle {
-      position: absolute;
       bottom: 8rem;
       right: 2rem;
-      background: #fff8f0;
-      border: 2px solid #8b5e3c;
-      border-radius: 12px;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      color: #4b2e2e;
-      cursor: pointer;
-      font-family: 'Georgia', serif;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      z-index: 999;
+    }
+
+    .rain-toggle {
+      bottom: 2rem;
+      right: 2rem;
     }
 
     .reading-nook {
       display: none;
-      position: absolute;
+      position: fixed;
       bottom: 14rem;
       right: 2rem;
       background-color: rgba(255, 255, 255, 0.92);
@@ -146,6 +139,7 @@
       max-width: 280px;
       font-family: 'Georgia', serif;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      z-index: 999;
     }
 
     .reading-nook h2 {
@@ -172,53 +166,55 @@
       .modal {
         width: 90%;
         height: 60%;
-        top: 45%;
+        top: 20%;
         left: 5%;
       }
 
       .mail-button {
         top: 65%;
-        left: 45%;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
-      .reading-toggle, .reading-nook {
+      .reading-toggle,
+      .rain-toggle {
         right: 1rem;
         left: 1rem;
-        bottom: unset;
+        width: calc(100% - 2rem);
       }
 
       .reading-nook {
+        right: 1rem;
+        left: 1rem;
         bottom: 12rem;
-        max-width: 90%;
+        max-width: none;
       }
 
       .welcome {
         max-width: 90%;
         left: 1rem;
         right: 1rem;
+        bottom: 1rem;
+      }
+
+      .nav {
+        left: 0.5rem;
+        right: 0.5rem;
+        text-align: center;
+        padding: 0.5rem;
+      }
+
+      .nav a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
       }
     }
-
-    .rain-toggle {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  background: #fff8f0;
-  border: 2px solid #8b5e3c;
-  border-radius: 12px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: #4b2e2e;
-  cursor: pointer;
-  font-family: 'Georgia', serif;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-}
   </style>
 </head>
 <body>
 
-    <!-- 🔊 Background Audio -->
+  <!-- 🔊 Background Audio -->
   <audio autoplay loop>
     <source src="audio/rain-inside.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
@@ -274,8 +270,9 @@
     }
   </script>
 
+  <!-- 🔊 Rain Toggle -->
   <audio id="rainAudio" autoplay loop>
-    <source src="audio/raintinroof.mp3" type="audio/mpeg">
+    <source src="audio/raintinroof.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 

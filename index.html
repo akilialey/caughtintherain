@@ -2,41 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Rain Inn</title>
   <style>
     body {
-      background-color: #1e1e1e;
-      color: #f0e6d2;
-      font-family: 'Georgia', serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
       margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-color: #1e1e1e;
       background-image: url('images/frontdoor.png');
       background-size: cover;
       background-position: center;
-      position: relative;
+      color: #f0e6d2;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
-    .overlay {
-      background: rgba(30, 30, 30, 0.7);
-      padding: 2rem;
+    main.overlay {
+      background-color: rgba(30, 30, 30, 0.7);
+      padding: 2.5rem;
       border-radius: 1rem;
+      max-width: 90%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
     }
 
     .button {
-      margin: 1rem;
+      display: inline-block;
+      margin: 0.5rem;
       padding: 1rem 2rem;
       background-color: #665d4e;
       border: none;
       border-radius: 0.5rem;
       color: #fff;
       font-size: 1.2rem;
-      cursor: pointer;
       text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     .button:hover {
@@ -47,9 +61,9 @@
       position: absolute;
       bottom: 1rem;
       right: 1rem;
-      background: #fff8f0;
+      background-color: #fff8f0;
       border: 2px solid #8b5e3c;
-      border-radius: 12px;
+      border-radius: 0.75rem;
       padding: 0.5rem 1rem;
       font-size: 1rem;
       color: #4b2e2e;
@@ -62,19 +76,19 @@
 </head>
 <body>
 
-  <div class="overlay">
+  <main class="overlay" role="main">
     <h1>Welcome to the Inn</h1>
     <p>You stumble upon a warm glow in the middle of a downpour. Will you...</p>
     <a href="outside.html" class="button">Stay Outside 🌧️</a>
     <a href="inside.html" class="button">Step Inside 🕯️</a>
-  </div>
+  </main>
 
   <audio id="rainAudio" autoplay loop>
-    <source src="audio/rain.mp3" type="audio/mpeg">
+    <source src="audio/rain.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <button class="rain-toggle" onclick="toggleRain()">⏸️ Pause Rain</button>
+  <button class="rain-toggle" onclick="toggleRain()" aria-label="Toggle rain sounds">⏸️ Pause Rain</button>
 
   <script>
     const rainAudio = document.getElementById("rainAudio");
