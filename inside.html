@@ -42,7 +42,7 @@
     /* 📬 You've Got Mail Button */
     .mail-button {
       position: absolute;
-      top: 380px; /* above the fireplace */
+      top: 380px;
       left: 235px;
       background: #fff8f0;
       border: 2px solid #8b5e3c;
@@ -63,7 +63,7 @@
       transform: translateY(-3px);
     }
 
-    /* ✨ Modal (Chatbox) */
+    /* ✨ Modal Base */
     .modal {
       display: none;
       position: absolute;
@@ -77,13 +77,89 @@
       padding: 0.5rem;
       box-shadow: 0 0 20px rgba(0,0,0,0.4);
       z-index: 1000;
-      overflow: hidden;
+      overflow: auto;
+    }
+
+    /* 💌 Log Modal Specific */
+    .log-content {
+      padding: 1rem;
+      font-family: 'Georgia', serif;
+      color: #4b2e2e;
+    }
+
+    .log-content h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      border-bottom: 2px solid #8b5e3c;
+      padding-bottom: 0.5rem;
+    }
+
+    .log-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .log-content li {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .log-content li::before {
+      content: "🪵      ";
+      position: absolute;
+      left: 0;
     }
 
     .modal iframe {
       width: 100%;
       height: 100%;
       border: none;
+    }
+
+    /* 📚 Reading Nook Styles */
+    .reading-toggle {
+      position: absolute;
+      bottom: 8rem;
+      right: 2rem;
+      background: #fff8f0;
+      border: 2px solid #8b5e3c;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: #4b2e2e;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+
+    .reading-nook {
+      display: none;
+      position: absolute;
+      bottom: 14rem;
+      right: 2rem;
+      background-color: rgba(255, 255, 255, 0.92);
+      color: #4b2e2e;
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      max-width: 280px;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .reading-nook h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .reading-nook ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .reading-nook li {
+      margin-bottom: 0.6rem;
     }
 
     @keyframes floaty {
@@ -103,6 +179,17 @@
       .mail-button {
         top: 65%;
         left: 45%;
+      }
+
+      .reading-toggle, .reading-nook {
+        right: 1rem;
+        left: 1rem;
+        bottom: unset;
+      }
+
+      .reading-nook {
+        bottom: 12rem;
+        max-width: 90%;
       }
 
       .welcome {
@@ -128,19 +215,42 @@
     <p>Welcome inside. The fire is crackling. The rain whispers outside. Take a seat and explore.</p>
   </div>
 
-  <!-- 📬 Mail Button -->
-  <button class="mail-button" onclick="toggleModal()">💌</button>
+  <!-- 📚 Reading Nook Toggle Button -->
+  <button class="reading-toggle" onclick="toggleReading()">📚 Reading Nook</button>
 
-  <!-- 💌 Modal Chat -->
-  <div class="modal" id="fireModal">
-    <iframe src="https://www3.cbox.ws/box/?boxid=3546852&boxtag=bv7ha1" allowtransparency="yes" allow="autoplay" scrolling="auto"></iframe>
+  <!-- 📖 Reading Nook Expandable Section -->
+  <div class="reading-nook" id="readingNook">
+    <h2>📚 Reading Nook</h2>
+    <ul>
+      <li><strong>Currently:</strong> <em>Wintering</em> by Katherine May</li>
+      <li><strong>Finished:</strong> <em>The Midnight Library</em> by Matt Haig</li>
+      <li><strong>Want to read:</strong> <em>Braiding Sweetgrass</em> by Robin Wall Kimmerer</li>
+    </ul>
+  </div>
+
+  <!-- 📬 Mail Button -->
+  <button class="mail-button" onclick="toggleLog()">💌</button>
+
+  <!-- 📝 Personal Log Modal -->
+  <div class="modal" id="logModal">
+    <div class="log-content">
+      <h2>Innkeeper's Log</h2>
+      <ul>
+        <li>May 25 '25 - Sat by the fire, wrote my first entry. Feels good here.</li>
+      </ul>
+    </div>
   </div>
 
   <!-- 🧠 JS Toggle -->
   <script>
-    function toggleModal() {
-      const modal = document.getElementById('fireModal');
+    function toggleLog() {
+      const modal = document.getElementById('logModal');
       modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function toggleReading() {
+      const nook = document.getElementById('readingNook');
+      nook.style.display = (nook.style.display === 'block') ? 'none' : 'block';
     }
   </script>
 
