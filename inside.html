@@ -11,18 +11,17 @@
       background-size: cover;
       font-family: 'Georgia', serif;
       color: #f2e9e4;
-      position: relative;
-      min-height: 100vh;
     }
 
     .nav {
-      position: fixed;
+      position: absolute;
       top: 1rem;
       left: 1rem;
       background: rgba(0, 0, 0, 0.6);
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
-      z-index: 1000;
+      display: flex;
+      flex-wrap: wrap;
     }
 
     .nav a {
@@ -33,7 +32,7 @@
     }
 
     .welcome {
-      position: fixed;
+      position: absolute;
       bottom: 2rem;
       left: 2rem;
       background: rgba(0, 0, 0, 0.5);
@@ -41,29 +40,26 @@
       border-radius: 1rem;
       max-width: 300px;
       line-height: 1.6;
+      font-size: 1.2rem;
     }
 
-    .mail-button,
-    .reading-toggle,
-    .rain-toggle {
-      position: fixed;
+    .mail-button {
+      position: absolute;
+      top: 25vh;
+      left: 50%;
+      transform: translateX(-50%);
       background: #fff8f0;
       border: 2px solid #8b5e3c;
       border-radius: 12px;
       padding: 0.6rem 1.1rem;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       color: #4b2e2e;
       cursor: pointer;
       font-family: 'Georgia', serif;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
       transition: background 0.3s, transform 0.2s;
-      z-index: 999;
-    }
-
-    .mail-button {
-      top: 380px;
-      left: 235px;
       animation: floaty 3s ease-in-out infinite;
+      z-index: 999;
     }
 
     .mail-button:hover {
@@ -73,29 +69,30 @@
 
     .modal {
       display: none;
-      position: fixed;
-      top: 460px;
-      left: 140px;
-      width: 420px;
-      height: 480px;
+      position: absolute;
+      top: 40vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 420px;
+      height: 60vh;
       background: rgba(255, 255, 255, 0.94);
       border: 2px solid #8b5e3c;
       border-radius: 1rem;
-      padding: 0.5rem;
+      padding: 1rem;
       box-shadow: 0 0 20px rgba(0,0,0,0.4);
       z-index: 1000;
       overflow: auto;
     }
 
     .log-content {
-      padding: 1rem;
       font-family: 'Georgia', serif;
       color: #4b2e2e;
     }
 
     .log-content h2 {
       margin-top: 0;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       border-bottom: 2px solid #8b5e3c;
       padding-bottom: 0.5rem;
     }
@@ -103,11 +100,12 @@
     .log-content ul {
       list-style: none;
       padding: 0;
+      font-size: 1rem;
     }
 
     .log-content li {
       margin-bottom: 1rem;
-      padding-left: 1rem;
+      padding-left: 1.5rem;
       position: relative;
     }
 
@@ -118,28 +116,34 @@
     }
 
     .reading-toggle {
-      bottom: 8rem;
-      right: 2rem;
-    }
-
-    .rain-toggle {
-      bottom: 2rem;
-      right: 2rem;
+      position: absolute;
+      bottom: 10vh;
+      right: 5%;
+      background: #fff8f0;
+      border: 2px solid #8b5e3c;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: #4b2e2e;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
     }
 
     .reading-nook {
       display: none;
-      position: fixed;
-      bottom: 14rem;
-      right: 2rem;
+      position: absolute;
+      bottom: 20vh;
+      right: 5%;
       background-color: rgba(255, 255, 255, 0.92);
       color: #4b2e2e;
       padding: 1rem 1.5rem;
       border-radius: 1rem;
-      max-width: 280px;
+      max-width: 90vw;
       font-family: 'Georgia', serif;
+      font-size: 1rem;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      z-index: 999;
     }
 
     .reading-nook h2 {
@@ -156,71 +160,74 @@
       margin-bottom: 0.6rem;
     }
 
+    .rain-toggle {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      background: #fff8f0;
+      border: 2px solid #8b5e3c;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: #4b2e2e;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+
     @keyframes floaty {
       0% { transform: translateY(0); }
       50% { transform: translateY(-4px); }
       100% { transform: translateY(0); }
     }
 
-    @media (max-width: 768px) {
-      .modal {
-        width: 90%;
-        height: 60%;
-        top: 20%;
-        left: 5%;
+    @media (max-width: 600px) {
+      body {
+        font-size: 16px;
       }
 
-      .mail-button {
-        top: 65%;
-        left: 50%;
-        transform: translateX(-50%);
+      .nav {
+        flex-direction: column;
+        font-size: 1rem;
       }
 
-      .reading-toggle,
-      .rain-toggle {
-        right: 1rem;
-        left: 1rem;
-        width: calc(100% - 2rem);
-      }
-
-      .reading-nook {
-        right: 1rem;
-        left: 1rem;
-        bottom: 12rem;
-        max-width: none;
+      .nav a {
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
       }
 
       .welcome {
+        font-size: 1rem;
         max-width: 90%;
         left: 1rem;
         right: 1rem;
         bottom: 1rem;
       }
 
-      .nav {
-        left: 0.5rem;
-        right: 0.5rem;
-        text-align: center;
-        padding: 0.5rem;
+      .mail-button {
+        font-size: 1.3rem;
       }
 
-      .nav a {
-        display: inline-block;
-        margin: 0 0.5rem;
-        font-size: 0.9rem;
+      .modal {
+        font-size: 1rem;
+      }
+
+      .reading-toggle,
+      .reading-nook,
+      .rain-toggle {
+        font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- 🔊 Background Audio -->
   <audio autoplay loop>
     <source src="audio/rain-inside.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <!-- 🔗 Navigation -->
   <div class="nav">
     <a href="index.html">Home</a>
     <a href="outside.html">Outside</a>
@@ -228,15 +235,12 @@
     <a href="about.html">About</a>
   </div>
 
-  <!-- 📝 Welcome Message -->
   <div class="welcome">
     <p>Welcome inside. The fire is crackling. The rain whispers outside. Take a seat and explore.</p>
   </div>
 
-  <!-- 📚 Reading Nook Toggle Button -->
   <button class="reading-toggle" onclick="toggleReading()">📚 Reading Nook</button>
 
-  <!-- 📖 Reading Nook Expandable Section -->
   <div class="reading-nook" id="readingNook">
     <h2>📚 Reading Nook</h2>
     <ul>
@@ -244,10 +248,8 @@
     </ul>
   </div>
 
-  <!-- 📬 Mail Button -->
   <button class="mail-button" onclick="toggleLog()">💌</button>
 
-  <!-- 📝 Personal Log Modal -->
   <div class="modal" id="logModal">
     <div class="log-content">
       <h2>Innkeeper's Log</h2>
@@ -257,7 +259,13 @@
     </div>
   </div>
 
-  <!-- 🧠 JS Toggle -->
+  <audio id="rainAudio" autoplay loop>
+    <source src="audio/raintinroof.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button class="rain-toggle" onclick="toggleRain()">⏸️ Pause Rain</button>
+
   <script>
     function toggleLog() {
       const modal = document.getElementById('logModal');
@@ -268,17 +276,7 @@
       const nook = document.getElementById('readingNook');
       nook.style.display = (nook.style.display === 'block') ? 'none' : 'block';
     }
-  </script>
 
-  <!-- 🔊 Rain Toggle -->
-  <audio id="rainAudio" autoplay loop>
-    <source src="audio/raintinroof.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
-
-  <button class="rain-toggle" onclick="toggleRain()">⏸️ Pause Rain</button>
-
-  <script>
     const rainAudio = document.getElementById("rainAudio");
     const rainButton = document.querySelector(".rain-toggle");
     let isPlaying = true;
