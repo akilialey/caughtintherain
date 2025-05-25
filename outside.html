@@ -49,9 +49,26 @@
     nav a:hover {
       background: rgba(123, 112, 95, 0.9);
     }
+
+    .rain-toggle {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background: #fff8f0;
+      border: 2px solid #8b5e3c;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: #4b2e2e;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
+
   <nav>
     <a href="index.html">🏠 Return</a>
     <a href="inside.html">🕯️ Go Inside</a>
@@ -61,10 +78,28 @@
     <p>The porch is dry, the rain is soft. The fire crackles nearby. You’ve got time...</p>
   </div>
 
-  <audio autoplay loop>
-    <source src="https://freesound.org/data/previews/396/396255_5121236-lq.mp3" type="audio/mpeg">
+  <audio id="rainAudio" autoplay loop>
+    <source src="audio/rain.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+
+  <button class="rain-toggle" onclick="toggleRain()">⏸️ Pause Rain</button>
+
+  <script>
+    const rainAudio = document.getElementById("rainAudio");
+    const rainButton = document.querySelector(".rain-toggle");
+    let isPlaying = true;
+
+    function toggleRain() {
+      if (isPlaying) {
+        rainAudio.pause();
+        rainButton.textContent = "▶️ Play Rain";
+      } else {
+        rainAudio.play();
+        rainButton.textContent = "⏸️ Pause Rain";
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
 </body>
 </html>
-

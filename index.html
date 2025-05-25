@@ -8,7 +8,8 @@
       background-color: #1e1e1e;
       color: #f0e6d2;
       font-family: 'Georgia', serif;
-      display: flex;      flex-direction: column;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -17,12 +18,15 @@
       background-image: url('images/frontdoor.png');
       background-size: cover;
       background-position: center;
+      position: relative;
     }
+
     .overlay {
       background: rgba(30, 30, 30, 0.7);
       padding: 2rem;
       border-radius: 1rem;
     }
+
     .button {
       margin: 1rem;
       padding: 1rem 2rem;
@@ -34,19 +38,60 @@
       cursor: pointer;
       text-decoration: none;
     }
+
     .button:hover {
       background-color: #7b705f;
+    }
+
+    .rain-toggle {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background: #fff8f0;
+      border: 2px solid #8b5e3c;
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: #4b2e2e;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
     }
   </style>
 </head>
 <body>
+
   <div class="overlay">
     <h1>Welcome to the Inn</h1>
     <p>You stumble upon a warm glow in the middle of a downpour. Will you...</p>
     <a href="outside.html" class="button">Stay Outside 🌧️</a>
     <a href="inside.html" class="button">Step Inside 🕯️</a>
   </div>
+
+  <audio id="rainAudio" autoplay loop>
+    <source src="audio/rain.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button class="rain-toggle" onclick="toggleRain()">⏸️ Pause Rain</button>
+
+  <script>
+    const rainAudio = document.getElementById("rainAudio");
+    const rainButton = document.querySelector(".rain-toggle");
+    let isPlaying = true;
+
+    function toggleRain() {
+      if (isPlaying) {
+        rainAudio.pause();
+        rainButton.textContent = "▶️ Play Rain";
+      } else {
+        rainAudio.play();
+        rainButton.textContent = "⏸️ Pause Rain";
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+
 </body>
 </html>
-
-

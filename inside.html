@@ -198,9 +198,31 @@
         right: 1rem;
       }
     }
+
+    .rain-toggle {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: #fff8f0;
+  border: 2px solid #8b5e3c;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #4b2e2e;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
   </style>
 </head>
 <body>
+
+    <!-- 🔊 Background Audio -->
+  <audio autoplay loop>
+    <source src="audio/rain-inside.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
 
   <!-- 🔗 Navigation -->
   <div class="nav">
@@ -222,9 +244,7 @@
   <div class="reading-nook" id="readingNook">
     <h2>📚 Reading Nook</h2>
     <ul>
-      <li><strong>Currently:</strong> <em>Wintering</em> by Katherine May</li>
-      <li><strong>Finished:</strong> <em>The Midnight Library</em> by Matt Haig</li>
-      <li><strong>Want to read:</strong> <em>Braiding Sweetgrass</em> by Robin Wall Kimmerer</li>
+      <li><strong>Currently:</strong> <em>The Courage to Be Disliked</em> by Ichiro Kishimi & Fumitake Koga</li>
     </ul>
   </div>
 
@@ -251,6 +271,30 @@
     function toggleReading() {
       const nook = document.getElementById('readingNook');
       nook.style.display = (nook.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+
+  <audio id="rainAudio" autoplay loop>
+    <source src="audio/raintinroof.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button class="rain-toggle" onclick="toggleRain()">⏸️ Pause Rain</button>
+
+  <script>
+    const rainAudio = document.getElementById("rainAudio");
+    const rainButton = document.querySelector(".rain-toggle");
+    let isPlaying = true;
+
+    function toggleRain() {
+      if (isPlaying) {
+        rainAudio.pause();
+        rainButton.textContent = "▶️ Play Rain";
+      } else {
+        rainAudio.play();
+        rainButton.textContent = "⏸️ Pause Rain";
+      }
+      isPlaying = !isPlaying;
     }
   </script>
 
